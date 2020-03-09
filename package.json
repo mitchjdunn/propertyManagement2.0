@@ -1,0 +1,24 @@
+{
+  "name": "propertymanagement2.0",
+  "version": "1.0.0",
+  "description": "The goal of this project is to create a system that will facilitate the needs of a property manager.  The key concepts will be forcing record keeping, providing templates for records, tenant portal, and routinely scheduled maintenance.  This repository is specifically for design documentation and notes.",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitchjdunn/propertyManagement2.0.git"
+  },
+  "author": "Mitchy Mitch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitchjdunn/propertyManagement2.0/issues"
+  },
+  "homepage": "https://github.com/mitchjdunn/propertyManagement2.0#readme"
+}
