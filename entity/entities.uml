@@ -1,0 +1,92 @@
+@startuml
+
+'skinparam nodesep 40
+'skinparam ranksep 40
+'hide circle
+'skinparam linetype ortho
+
+entity building {
+    * id
+    --
+    * address
+    * town
+    * zip
+    * client_id
+    * created_on
+    * modified_on
+}
+
+entity client {
+    * id
+    --
+    * name
+    * phone_number
+    * email
+    * address
+    * client_type
+    * created_on
+    * modified_on
+}
+
+entity apartment {
+    * id
+    --
+    * building_id
+    tenant_id
+    rent
+    * created_on
+    * modified_on
+}
+
+'immutable should only create new
+entity contract {
+    * id
+    --
+    * client_id
+    * template_id
+    * file_location
+    * created_on
+    * modified_on
+}
+
+entity maintenance_type {
+    * id
+    --
+    * name
+    * description
+    schedule
+    * template_id
+    * created_on
+    * modified_on
+}
+
+entity building_maintenance {
+    * id
+    --
+    * building_id
+    * maintenance_type
+    * file_location
+    * created_on
+    * modified_on
+}
+
+'immutable should only create new
+entity template {
+    * id
+    --
+    * file_location
+    name
+    description
+    * created_on
+}
+
+client ||--|{ building
+building||--|{apartment
+client}|--o|apartment
+client||--|{contract
+maintenance_type||--|{building_maintenance
+building_maintenance}|--||building
+maintenance_type}o--||template
+contract}o--||template
+
+@enduml

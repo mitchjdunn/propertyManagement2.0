@@ -1,0 +1,30 @@
+Tanant Portal
+    User logs in
+        TODO: authorizatoin service
+    setup auto pay/pay online yada yada yada
+        TODO: bank apis (ex paypal, unigold?)
+    create work order
+        TODO: Work order system
+    view contract
+    contact manager
+
+Landlord Portal
+    view payments
+    view workorders
+    view reciepts(for workorders)
+    view maintenance docs
+    view contract with manager
+    view contract with tenants
+    contact tenant
+    contact manager
+
+
+Manager Portal
+    view work orders
+    view payments
+    view all contracts
+    view all maintenance docs
+    submit maintenance docs
+    contact tenant
+    contact landlord
+

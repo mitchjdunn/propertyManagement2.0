@@ -1,0 +1,57 @@
+                    ,----------------.         
+                    |maintenance_type|         
+                    |----------------|         
+                    |*id             |         
+                    |--              |         
+                    |*name           |         
+                    |*description    |         
+                    |schedule        |         
+                    |*template_id    |         
+                    |*created_on     |         
+                    |*modified_on    |         
+                    |----------------|         
+                    `----------------'         
+                                               
+                                               
+                        ,-------------.        
+,--------------------.  |client       |        
+|building_maintenance|  |-------------|        
+|--------------------|  |*id          |        
+|*id                 |  |--           |        
+|--                  |  |*name        |        
+|*building_id        |  |*phone_number|        
+|*maintenance_type   |  |*email       |        
+|*file_location      |  |*address     |        
+|*created_on         |  |*client_type |        
+|*modified_on        |  |*created_on  |        
+|--------------------|  |*modified_on |        
+`--------------------'  |-------------|        
+           |            `-------------'        
+           |                                   
+    ,------------.                             
+    |building    |        ,--------------.     
+    |------------|        |contract      |     
+    |*id         |        |--------------|     
+    |--          |        |*id           |     
+    |*address    |        |--            |     
+    |*town       |        |*client_id    |     
+    |*zip        |        |*template_id  |     
+    |*client_id  |        |*file_location|     
+    |*created_on |        |*created_on   |     
+    |*modified_on|        |*modified_on  |     
+    |------------|        |--------------|     
+    `------------'        `--------------'     
+                                               
+                                               
+           ,------------.      ,--------------.
+           |apartment   |      |template      |
+           |------------|      |--------------|
+           |*id         |      |*id           |
+           |--          |      |--            |
+           |*building_id|      |*file_location|
+           |tenant_id   |      |name          |
+           |rent        |      |description   |
+           |*created_on |      |*created_on   |
+           |*modified_on|      |--------------|
+           |------------|      `--------------'
+           `------------'                      
