@@ -24,6 +24,7 @@ entity client {
     * email
     * address
     * client_type
+    user_id
     * created_on
     * modified_on
 }
@@ -80,13 +81,32 @@ entity template {
     * created_on
 }
 
+entity password{
+    *user_id
+    --
+    *password
+    status
+    created_on
+    modified_on
+}
+
+entity auth_token {
+    *token
+    --
+    *user_id
+    created_on
+    modified_on
+}
+
 client ||--|{ building
-building||--|{apartment
-client}|--o|apartment
-client||--|{contract
-maintenance_type||--|{building_maintenance
-building_maintenance}|--||building
-maintenance_type}o--||template
-contract}o--||template
+building ||--|{ apartment
+client }|--o| apartment
+client ||--|{ contract
+maintenance_type ||--|{ building_maintenance
+building_maintenance }|--|| building
+maintenance_type }o--|| template
+contract }o--|| template
+password |o--|| client
+client ||--o| auth_token
 
 @enduml

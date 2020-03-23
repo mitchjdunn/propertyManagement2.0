@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/mitchjdunn/propertyManagement2.0/issues"
   },
-  "homepage": "https://github.com/mitchjdunn/propertyManagement2.0#readme"
+  "homepage": "https://github.com/mitchjdunn/propertyManagement2.0#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.3",
+    "jquery": "^3.4.1",
+    "semantic-ui-css": "^2.4.1",
+    "vanilla-router": "^1.2.8"
+  }
 }
