@@ -1,7 +1,9 @@
 require('dotenv').config(); // read .env  files
 const express = require('express');
+const bodyParser = require('body-parser');
 
-const { getRates } = require('./lib/fixer-service');
+const { getRates, getHistorical, getSymbols, } = require('./lib/fixer-service');
+const { convertCurrency } = require('./lib/free-currency-service');
 
 const app = express();
 const port = process.env.port || 3000;
@@ -15,8 +17,16 @@ app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 
 //listen for http requests on port 3000;
 app.listen(port, () => {
-    console.log('listening on %d');
+    console.log('listening on %d', port);
 });
+
+// Parse Post data as url encoded dated
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+
+// Pars POST data as JSON
+app.use(bodyParser.json());
 
 // Express Error handler
 const errorHandler = (err, req, res) => {
@@ -44,6 +54,41 @@ app.get('/api/rates', async (req, res) => {
     }
 });
 
+// Fetch Symbols
+app.get('/api/symbols', async (req, res) =>{
+    try {
+
+        const data = await getSymbols();
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data);
+    } catch (error) {
+        errorHandler(error, req, res);
+    }
+});
+
+// convert currency
+app.post('/api/convert', async (req, res) => {
+    try {
+        const { from, to } = req.body;
+        const data = await convertCurrency(from, to);
+        res.setHeader('Content-Type', 'applicaiton/json');
+        res.send(data);
+    } catch (error) {
+        errorHandler(error, req, res);
+    }
+});
+
+app.post('/api/historical', async (req, res) => {
+    try{
+        const { date } = req.body;
+        const data = await getHistorical(date);
+        res.setHeader('Content-Type', 'applicaiton/json');
+        res.send(data);
+    } catch (error) {
+        errorHandler(error, req, res);
+    }
+});
+
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
@@ -52,4 +97,13 @@ app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));
 //     console.log(data);
 // };
 
-// test();
+// Test Currency Conversion Endpoint
+// const test = async() => {
+//   const data = await convertCurrency('USD', 'KES');
+//   console.log(data);
+// }
+// const test = async() => {
+//   const data = await getHistorical('2012-07-14');
+//   console.log(data);
+// }
+//  test();
