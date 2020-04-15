@@ -1,0 +1,11 @@
+@startsalt
+{
+{+
+    Login<&person> | "user_id"
+    Password<&key> | "*****  "
+    [Sign In <&account-login>] | [Sign Up]
+}
+}
+
+@endsalt
+
