@@ -1,6 +1,8 @@
 require('dotenv').config(); // read .env  files
 const express = require('express');
 
+const { getRates } = require('./lib/fixer-service');
+
 const app = express();
 const port = process.env.port || 3000;
 
@@ -16,5 +18,38 @@ app.listen(port, () => {
     console.log('listening on %d');
 });
 
+// Express Error handler
+const errorHandler = (err, req, res) => {
+    if(err.response) {
+        // The rquest was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        res.status(403).send({title: 'Server responded with an error', message: err.message });
+    } else if (err.request) {
+        // the request was made but no response was recieved
+        res.status(503).send({title: 'unable to communicate with server', message: err.message });
+    } else {
+        // Something happend in setting up the request that triggered and error
+        res.status(500).send({ title: 'An unexpected error occured', message: err.message});
+    }
+};
+
+// Fetch Latest Currency Rates
+app.get('/api/rates', async (req, res) => {
+    try {
+        const data = await getRates();
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data);
+    } catch (error) {
+        errorHAndler(error,req,re);
+    }
+});
+
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));
+
+// const test = async() => {
+//     const data = await getRates();
+//     console.log(data);
+// };
+
+// test();
